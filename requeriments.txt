@@ -1,0 +1,8 @@
+Vd:
+you/watch?v=WDpPGFkI9UU
+
+pip install
+.flask
+.flask_sqlalchemy
+.mysql-connector-python
+.mysqlclient

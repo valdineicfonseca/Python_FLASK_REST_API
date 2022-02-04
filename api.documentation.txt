@@ -1,0 +1,123 @@
+
+API em FLASK Python Documentation - CRUD
+--------------------------------------
+Author: Valdinei C.
+2022
+--------------------------------------
+.Necessário conexao com banco de dados MySQL ativo.
+.XAMPP phpMyAdmin installed
+.create BD name youtube
+.create TABLE name usuarios
+--------------------------------------
+used software POSTMAN
+--------------------------------------
+* Requisição de CONSULTA para visualizar todos os usuários cadastrados
+
+METHOD: [GET]
+http://127.0.0.1:81/usuarios
+
+Retorna em JSON de todos os usuarios cadastrados no banco de dados.
+Respota esperada no postman:
+{
+
+    "usuarios": [
+        {
+            "id": 0,
+            "nome": "nomedoprimeirousuario",
+            "email": "emaildoprimeirousuario@email.com"
+        },
+        {
+            "id": 1,
+            "nome": "nomedosegundousuario",
+            "email": "emaildosegundo@email.com"
+        }
+    ],
+    "mensagem": "Retorna todos os usuarios"
+}
+--------------------------------------
+* Requisição para CADASTRAR usuario
+
+POSTMAN
+BODY
+RAW
+JSON
+METHOD: [POST]
+http://127.0.0.1:81/usuario
+
+{
+    "nome": "NomeDoUsuario",
+    "email": "emaildousuario@email.com"
+}
+
+Cadastrar Usuario.
+Respota esperada no postman:
+{
+    "usuario": {
+        "id": 2,
+        "nome": "NomeDoUsuario",
+        "email": "emaildousuario@email.com"
+    },
+    "mensagem": "Criado com sucesso"
+}
+--------------------------------------
+* Requisição CONSULTAR Usuario pelo <ID>
+
+http://127.0.0.1:81/usuario/<id> 
+
+POSTMAN
+METHOD: [GET]
+http://127.0.0.1:81/usuario/1
+
+Respota esperada no postman:
+{
+    "usuario": {
+        "id": 1,
+        "nome": "NomeDoUsuario",
+        "email": "emaildousuario@email.com"
+    }
+}
+--------------------------------------
+* Requisição ATUALIZAR Usuario pelo <ID>
+
+http://127.0.0.1:81/usuario/<id> 
+
+POSTMAN
+BODY
+RAW
+JSON
+METHOD: [PUT]
+http://127.0.0.1:81/usuario/3
+
+
+{
+    "nome": "NomeDoUsuario",
+    "email": "emaildousuario@email.com"
+}
+
+Respota esperada no postman:
+{
+    "usuario": {
+        "id": 3,
+        "nome": "NomeDoUsuario",
+        "email": "emaildousuario@email.com"
+    },
+    "mensagem": "Atualizado com sucesso"
+}
+--------------------------------------
+* Requisição DELETAR Usuario pelo <ID>
+
+http://127.0.0.1:81/usuario/<id> 
+
+POSTMAN
+METHOD: [DELETE]
+http://127.0.0.1:81/usuario/3
+
+Respota esperada no postman:
+{
+    "usuario": {
+        "id": 3,
+        "nome": "NomeDoUsuario",
+        "email": "emaildousuario@email.com"
+    },
+    "mensagem": "Deletado com sucesso"
+}

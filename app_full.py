@@ -17,6 +17,17 @@
 # Author : Valdinei C @ 2022
 #----------------------------------
 
+############################
+#!/usr/bin/env python
+# funcao def pegaValor
+
+import html
+import cgi
+import cgitb; cgitb.enable()     # for troubleshooting
+
+############################
+
+
 from pickle import TRUE
 from flask import Flask, Response, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -55,6 +66,50 @@ def index():
 def apidoc():
     return render_template('index.html')
 
+# Verifica email de usuarios cadastrados, caso não cadastrado aparece form
+@app.route("/verifica/<email_user>", methods=["GET"])
+def seleciona_usuarios_verifica(email_user):
+    usuarios_objetos = Usuario.query.all()
+    
+    # Loop for todos usuarios objetos convertidos em lista JSON
+    usuarios_json = [usuario.to_json() for usuario in usuarios_objetos]
+    print(usuarios_objetos)
+    
+    cad = "Cadastre seu e-mail"
+
+    # imprime e-mail de todos usuarios
+    for  usr_json in usuarios_json:
+        if email_user == usr_json["email"]:
+            cad = "E-mail já cadastrado"
+            print(cad)
+        print(usr_json["email"])
+
+    return render_template('verifica_form.html', name=email_user, cadastro=cad)
+
+
+#teste pegar valor
+@app.route("/pegavalor", methods=['GET', 'POST'])
+def pegaValor():
+    ##print("Content-Type: text/html") # HTTP header to say HTML is following
+    ##print()                          # blank line, end of headers
+    nome_captura = request.form['nome_form']
+    email_captura = request.form['email_form']
+    ##form = cgi.FieldStorage()
+    ##say  = html.escape(form["say"])
+    ##print(say)
+    print("TESTE.....",nome_captura," ",email_captura)
+    
+    try:
+        usuario = Usuario(nome=nome_captura, email= email_captura)
+        db.session.add(usuario)
+        db.session.commit()
+        return gera_response(201, "usuario", usuario.to_json(), "Criado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, "usuario", {}, "Erro ao cadastrar")
+    
+    #return render_template('index.html', name=nome_captura, email_cap=email_captura)
+
 
 # Selecionar Tudo
 @app.route("/usuarios", methods=["GET"])
@@ -65,6 +120,9 @@ def seleciona_usuarios():
     usuarios_json = [usuario.to_json() for usuario in usuarios_objetos]
     print(usuarios_objetos)
     
+    for  usr_json in usuarios_json:
+        print(usr_json["email"])
+
     return gera_response(200, "usuarios", usuarios_json, "Retorna todos os usuarios")
 
 # Selecionar Individual

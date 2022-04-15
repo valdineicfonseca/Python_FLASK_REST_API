@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Otimização de Serviços e Vendas">
+    <meta name="keywords" content="HTML, CSS, JavaScript, mazal, icons">
+    <meta name="author" content="Valdinei C.">
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500&family=Raleway:wght@100;200;300;400;500&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "ROBOTO", sans-serif;
+            background-color: #413b3b;
+            color: #03dac6;
+        }
+
+        h2 {
+            color: #03dac6;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: #6C7A89;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 5    00px;
+            height: 500px;
+            background: rgb(105, 103, 103);
+        }
+
+        .cadastrado,
+        #cad_resp {
+
+            background: none;
+            font-size: 20px;
+            text-align: center;
+            width: 350px;
+            height: 300px;
+            margin: 60px 60px;
+        }
+
+        #otimo {
+            font-size: 30px;
+            font-weight: 600px;
+            background: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            border-color: #03dac6;
+            border: 1px;
+            width: 300px;
+            height: 80px;
+            margin-top: 20px;
+            margin-left: 20px;
+            padding-top: 5px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #03dac6;
+            color: black;
+            font-size: 25px;
+        }
+
+        .frase {
+            font-size: 20px;
+            background: none;
+        }
+
+        .titulo {
+            position: relative;
+            width: 400px;
+            padding: 15px 10px 15px 10px;
+            vertical-align: middle;
+            display: table-cell;
+        }
+        .titulo2{
+            display: inline-block;
+            position: absolute;
+            top: 23px;
+            height: 30px;
+            width: 300px;
+            --background-color: aqua;
+            padding-bottom: 10px;
+        }
+        .icone {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            --background-color: rgba(235, 22, 6, 0.61);
+            margin-top: 10px;
+            font-size: 25px;
+        }
+        .form_cadastro{
+            background-color: antiquewhite;
+            width: 300px;
+            height: 300px;
+            margin: 60px 60px;
+            text-align: center;
+        }
+    </style>
+
+    <title>Verificando dados</title>
+</head>
+
+<body onload="start()">
+
+    <div class="container">
+        <div class="box">
+            <h2>
+                <div class="titulo"> 
+                    <div class="icone">
+                        <span class="material-icons">
+                            assignment_ind
+                        </span>
+                    </div>
+                    <div class="titulo2">
+                        Cadastro
+                    </div> 
+                   
+                </div>
+            </h2>
+
+            <div class="cadastrado" id="cad_ok">
+                <span id="cad_resp">{{ cadastro }}</span>
+                <br>{{ name }}
+                <br><br>
+                <p>
+                    <span id="otimo">Óitmo</span>
+                </p><br>
+                <span class="frase">Seu e-mail já esta em</span>
+                <span class="frase">nosso banco de dados!</span>
+                <span class="frase">Em breve entraremos em contato!</span>
+                <span class="frase">Mas se quiser entrar em contato,</span>
+                <span class="frase">clique no botão abaixo:</span>
+                <br>
+                <a
+                    href="https://api.whatsapp.com/send?phone=5533998319563&text=Ol%C3%A1%2C%20gostaria%20de%20alavancar%20minhas%20vendas%2C%20de%20produtos%20ou%20servi%C3%A7os.">
+                    <div class="btn">
+                        <span class="material-icons" ">
+                            markunread
+                        </span><br> 33 99831-9563
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="form_cadastro" id="form">
+                <form  method="POST" name="myForm">
+                    <p><label for="first_name">First Name:</label>
+                    <input type="text" name="nome" id="fusuario"></p>
+            
+                    <p><label for="last_name">Last Name:</label>
+                    <input type="text" name="email" id="lusuario"></p>
+            
+                    <input value="Submit" type="button" id="btn">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+
+      
+        
+   
+    function start() {
+
+        console.log(" start ok!") 
+        let divcad_ok = document.getElementById("cad_ok")
+        let form_cad = document.getElementById("form") 
+        let resp = document.getElementById("cad_resp").innerHTML 
+        console.log(resp)
+
+        divcad_ok.style.display = "none" 
+        form_cad.style.display = "none"
+
+        if (resp === "E-mail já cadastrado") {
+            console.log("email cadastrado ok!") 
+            divcad_ok.style.display="block" //exibe div 
+        } else {
+            form_cad.style.display = "block"
+        }
+    } 
+</script>
+
+</html>

@@ -112,7 +112,8 @@ def pegaValor():
         usuario = Usuario(nome=nome_captura, email= email_captura, seo=seo_captura, ia=ia_captura, vendas=vendas_captura, tp=tp_captura, data_cadastro=data_captura)
         db.session.add(usuario)
         db.session.commit()
-        return gera_response(201, "usuario", usuario.to_json(), "Criado com sucesso")
+        return envia_email(email_captura)
+        #return gera_response(201, "usuario", usuario.to_json(), "Criado com sucesso")
     except Exception as e:
         print('Erro', e)
         return gera_response(400, "usuario", {}, "Erro ao cadastrar")
@@ -233,7 +234,7 @@ def envia_email(email_send):
 
     email_msg = MIMEMultipart()
     email_msg['From'] = login
-    email_msg['To'] = login
+    email_msg['To'] = email_send
     email_msg['Subject'] = "Aprenda a escalar suas vendas - MAGO-DIGITAL [[[Mensagem Automática]]] "
     email_msg.attach(MIMEText(conteudo_email,'html'))
 

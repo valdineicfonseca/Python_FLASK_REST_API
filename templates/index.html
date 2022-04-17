@@ -16,9 +16,15 @@
 </head>
 
 <body>
-    {{name}}
-    <br>
-    {{email_cap}}
+    
+    {% if name != "" %}
+        <p>Your upper case name is {{ name }}.</p>
+        {{name}}
+        <br>
+        {{email_cap}}
+    {% endif %}
+    
+    
     <h2>API em FLASK Python Documentation - CRUD</h2>
     --------------------------------------<br>
     Author: Valdinei C. <br>

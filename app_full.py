@@ -17,22 +17,16 @@
 # Author : Valdinei C @ 2022
 #----------------------------------
 
-############################
-#!/usr/bin/env python
-# funcao def pegaValor
-
-import html
-import cgi
-import cgitb; cgitb.enable()     # for troubleshooting
-
-############################
-
-
+from email import encoders
+from email.mime.base import MIMEBase
 from pickle import TRUE
+import smtplib
 from flask import Flask, Response, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
 import json
+
+from email_senha import EMAIL_MENSAGEM
 
 # antes executar app_create_db, criar database unica vez.
 # executar app_create_table, criar tabela unica vez.
@@ -51,10 +45,15 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key= True)
     nome = db.Column(db.String(50))
     email = db.Column(db.String(100))
+    seo = db.Column(db.String(10))
+    ia = db.Column(db.String(10))
+    vendas = db.Column(db.String(10))
+    tp = db.Column(db.String(10))
+    data_cadastro = db.Column(db.String(20))
 
     #transformar objeto em json
     def to_json(self):
-        return {"id": self.id, "nome": self.nome, "email": self.email}
+        return {"id": self.id, "nome": self.nome, "email": self.email, "seo": self.seo, "ia": self.ia, "vendas": self.vendas, "tp": self.tp, "data_cadastro":self.data_cadastro}
 
 #rota para raiz 
 @app.route('/')
@@ -94,13 +93,23 @@ def pegaValor():
     ##print()                          # blank line, end of headers
     nome_captura = request.form['nome_form']
     email_captura = request.form['email_form']
+    seo_captura = request.form['seo_form']
+    ia_captura = request.form['ia_form']
+    vendas_captura = request.form['vendas_form']
+    tp_captura = request.form['tp_form']
+    data_captura = request.form['data_form']
     ##form = cgi.FieldStorage()
     ##say  = html.escape(form["say"])
     ##print(say)
-    print("TESTE.....",nome_captura," ",email_captura)
+    print("Cliente.....",nome_captura," ",email_captura)
+    print("S.E.O ", seo_captura)
+    print("Inteligencia Artificial ", ia_captura)
+    print("Vendas na internet ", vendas_captura)
+    print("Trafego Pago ", tp_captura)
+    print("Data de registo ", data_captura)
     
     try:
-        usuario = Usuario(nome=nome_captura, email= email_captura)
+        usuario = Usuario(nome=nome_captura, email= email_captura, seo=seo_captura, ia=ia_captura, vendas=vendas_captura, tp=tp_captura, data_cadastro=data_captura)
         db.session.add(usuario)
         db.session.commit()
         return gera_response(201, "usuario", usuario.to_json(), "Criado com sucesso")
@@ -191,4 +200,61 @@ def gera_response(status, nome_do_conteudo, conteudo, mensagem=False):
     return Response(json.dumps(body), status=status, mimetype="application/json")
 
 
+
+
+
+
+# Envio de e-mail automatico - opção google security app menos seguro ativada
+@app.route("/envia/email/<email_send>", methods=["GET"])
+def envia_email(email_send):
+    # Importa passowrd de outro arquivo.
+    from email_senha import EMAIL_PASSWORD as EMAIL_PASS
+    
+    # Import libs e multpart
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    EMAIL_ADDRESS="magodigital.email.automatico@gmail.com"
+
+    # start servidor SMTP
+    host ="smtp.gmail.com"
+    email_port = "587"
+    login = EMAIL_ADDRESS
+    senha = EMAIL_PASS
+
+    server = smtplib.SMTP(host,email_port)
+    server.ehlo()
+    server.starttls()
+    server.login(login,senha)
+
+    # Construindo estrutura do e-mail
+    conteudo_email = EMAIL_MENSAGEM
+
+    email_msg = MIMEMultipart()
+    email_msg['From'] = login
+    email_msg['To'] = login
+    email_msg['Subject'] = "Aprenda a escalar suas vendas - MAGO-DIGITAL [[[Mensagem Automática]]] "
+    email_msg.attach(MIMEText(conteudo_email,'html'))
+
+    # para colocar arquivo anexo - leitura em binario
+    #file_anexo = "e:\\temp\\teste.txt"
+    #attachment = open(file_anexo,'rb') # R read B binario - leitura de arquivo em binario
+    
+    #transformando arquivo de Binario para Base64
+    #att = MIMEBase('application', 'octet-stream')
+    #att.set_payload(attachment.read())
+    #encoders.encode_base64(att)
+
+    # Cabeçalho do E-mail
+    #att.add_header('Content-Disposition', f'attachment; filename=teste.txt')
+    #attachment.close() # Fecha o arquivo
+
+    # Envia e-mail no tipo MIME no Servidor SMTP
+    server.sendmail(email_msg["From"],email_msg["To"],email_msg.as_string())
+    server.quit() ### Fecha conexao...
+
+    return render_template('verifica_form.html', name=email_send, cadastro='E-mail já cadastrado')
+
+# Roda aplicação ip local e porta
 app.run(host="127.0.0.1", port=81)

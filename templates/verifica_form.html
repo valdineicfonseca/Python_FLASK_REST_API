@@ -27,12 +27,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: "ROBOTO", sans-serif;
-            background-color: #413b3b;
+            --background-color: #413b3b;
             color: #03dac6;
         }
 
         h2 {
             color: #03dac6;
+            background-color: #413b3b;
         }
 
         .container {
@@ -46,9 +47,9 @@
         }
 
         .box {
-            width: 5    00px;
-            height: 500px;
-            background: rgb(105, 103, 103);
+            width: 450px;
+            height: 610px;
+            background: rgb(48, 44, 44);
         }
 
         .cadastrado,
@@ -119,12 +120,62 @@
             font-size: 25px;
         }
         .form_cadastro{
-            background-color: antiquewhite;
-            width: 300px;
+            background-color: none;
+            width: 500px;
             height: 300px;
-            margin: 60px 60px;
-            text-align: center;
+            --margin-left: 60px;
+            
         }
+        .lbl_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 55px;
+            margin-top: 5px;
+            --background-color: #6C7A89;
+        }
+        .input_cadastro_form{
+            font-size: 25px;
+            text-align: left;
+            margin-left: 55px;
+            margin-top: 5px;
+            background-color: #6C7A89;
+            padding-left: 10px;
+            color: crimson;
+
+        }
+        .check_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 55px;
+            margin-top: 5px;
+            height: 20px; 
+            width: 20px;
+
+        }
+        .check_texto_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 5px;
+            margin-top: 5px;
+
+        }
+        #btn_cadastro_form{
+            font-size: 25px;
+            text-align: center;
+            margin-left: 50px;
+            margin-top: 20px;
+            height: 50px; 
+            width: 340px;
+            border-radius: 10px;
+            border: 2px solid #03dac6;
+            background-color: black;
+        }
+        #btn_cadastro_form:hover{
+            color: black;
+            background-color: #03dac6;
+            font-size: 28px;
+        }
+        
     </style>
 
     <title>Verificando dados</title>
@@ -173,14 +224,55 @@
 
 
             <div class="form_cadastro" id="form">
-                <form  method="POST" name="myForm">
-                    <p><label for="first_name">First Name:</label>
-                    <input type="text" name="nome" id="fusuario"></p>
+                <form  method="POST" name="myForm" id="myFormSend" action="http://127.0.0.1:81/pegavalor">
+                    <br>
+                    <p><label class="lbl_cadastro_form" for="nome_form">
+                        Seu nome: <br>
+                    </label>
+                    <input type="text" name="nome_form" id="nome_form_id" class="input_cadastro_form"></p>
             
-                    <p><label for="last_name">Last Name:</label>
-                    <input type="text" name="email" id="lusuario"></p>
-            
-                    <input value="Submit" type="button" id="btn">
+                    <p><label class="lbl_cadastro_form" for="email_form">
+                        Seu e-mail: <br>
+                    </label>
+                    <input type="email" name="email_form" class="input_cadastro_form" id="email_form_id" value="{{ name }}" required></p>
+                    
+                    <br><span class="lbl_cadastro_form">Marque os serviços de interesse:</span>
+                    <p><br>
+                    <input class="check_cadastro_form" type="checkbox" name="seo_form" id="seo_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="seo_form">
+                        SEO Busca otimizada
+                    </label></p>
+                    
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="ia_form" id="ia_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="ia_form">
+                        I.A Inteligência Artificial
+                    </label></p>
+                    
+
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="vendas_form" id="vendas_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="vendas_form">
+                        Vendas na internet
+                    </label></p>
+                    
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="tp_form" id="tp_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="tp_form">
+                        Tráfego pago
+                    </label></p>
+                    
+                    <br>        
+                    <p><label class="lbl_cadastro_form" for="data_form">
+                        Data: <br>
+                    </label>
+                    <input type="text" name="data_form" id="data_form_id" class="input_cadastro_form" style="color: black;" readonly></p>
+
+                    <input value="Cadastrar" type="button" id="btn_cadastro_form">
+
                 </form>
             </div>
 
@@ -192,7 +284,38 @@
 
 <script>
 
-      
+      document.getElementById("btn_cadastro_form").addEventListener("click", myFunction)
+
+      function myFunction(){
+        let seo = document.getElementById("seo_form_id")
+        let ia = document.getElementById("ia_form_id")
+        let vendas = document.getElementById("vendas_form_id")
+        let tp = document.getElementById("tp_form_id")
+
+        if (seo.checked === false){
+            seo.value = "nao"
+            seo.checked = true
+        }
+        if (ia.checked === false){
+            ia.value = "nao"
+            ia.checked = true
+        }
+        if (vendas.checked === false){
+            vendas.value = "nao"
+            vendas.checked = true
+        }
+        if (tp.checked === false){
+            tp.value = "nao"
+            tp.checked = true // evitar erro no python de nao detectar campo
+        }
+
+        console.log("seo ", seo.value)
+        console.log("inteligencia artificial ", ia.value)
+        console.log("vendas na internet ", vendas.value)
+        console.log("trafego pago ", tp.value)
+
+        document.getElementById("myFormSend").submit()
+      }
         
    
     function start() {
@@ -201,7 +324,13 @@
         let divcad_ok = document.getElementById("cad_ok")
         let form_cad = document.getElementById("form") 
         let resp = document.getElementById("cad_resp").innerHTML 
+        let datanow = document.getElementById("data_form_id")
         console.log(resp)
+
+        //  use as simple as
+        let data_atual = new Date().toLocaleDateString() //('m-d-Y')  
+        console.log(data_atual)
+        datanow.value = data_atual
 
         divcad_ok.style.display = "none" 
         form_cad.style.display = "none"

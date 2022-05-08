@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../statics/css/style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,600;1,200&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+        rel="stylesheet">
+
+    <title>API Documentação</title>
+</head>
+
+<body>
+    
+    {% if name != "" %}
+        <p>Your upper case name is {{ name }}.</p>
+        {{name}}
+        <br>
+        {{email_cap}}
+    {% endif %}
+    
+    
+    <h2>API em FLASK Python Documentation - CRUD</h2>
+    --------------------------------------<br>
+    Author: Valdinei C. <br>
+    2022<br>
+    --------------------------------------<br>
+    <h4>Requisitos:</h4>
+    <ul>
+        <li>Necessário conexao com banco de dados MySQL ativo.</li>
+        <li>XAMPP phpMyAdmin installed</li>
+        <li>create BD name youtube</li>
+        <li>create TABLE name usuarios</li>
+    </ul>
+    --------------------------------------
+    <h4>Software POSTMAN</h4>
+    <div class="box">
+        <h4>Requisição de CONSULTA para visualizar <br> todos os usuários cadastrados</h4>
+
+        <strong>METHOD: [GET]</strong><br>
+        http://127.0.0.1:81/usuarios <br>
+
+        Retorna em JSON de todos os usuarios cadastrados no banco de dados.
+        Respota esperada no postman: <br>
+        {<br>
+
+        &nbsp;"usuarios": [<br>
+        {<br>
+        &nbsp;"id": 0,<br>
+        &nbsp;"nome": "nomedoprimeirousuario", <br>
+        &nbsp;"email": "emaildoprimeirousuario@email.com" <br>
+        },<br>
+        {<br>
+        &nbsp;"id": 1, <br>
+        &nbsp;"nome": "nomedosegundousuario",<br>
+        &nbsp;"email": "emaildosegundo@email.com" <br>
+        }
+        ],
+        &nbsp; "mensagem": "Retorna todos os usuarios" <br>
+        }<br>
+        --------------------------------------
+        <h4>Requisição para CADASTRAR usuario</h4>
+
+        <ul>
+            <li> POSTMAN</li>
+            <li>BODY</li>
+            <li>RAW</li>
+            <li>JSON</>
+        </ul>
+        METHOD: <strong>[POST]</strong> <br>
+        http://127.0.0.1:81/usuario <br>
+
+        { <br>
+        &nbsp;"nome": "NomeDoUsuario", <br>
+        &nbsp;"email": "emaildousuario@email.com" <br>
+        } <br>
+
+        Cadastrar Usuario. <br>
+        Respota esperada no postman: <br>
+        { <br>
+        &nbsp;"usuario": <br>
+        { <br>
+        &nbsp;"id": 2, <br>
+        &nbsp;"nome": "NomeDoUsuario", <br>
+        &nbsp;"email": "emaildousuario@email.com" <br>
+        }, <br>
+        &nbsp; "mensagem": "Criado com sucesso" <br>
+        } <br>
+        --------------------------------------
+        <h4>Requisição CONSULTAR Usuario pelo ID</h4>
+
+        http://127.0.0.1:81/usuario/id <br>
+
+        POSTMAN <br>
+        METHOD: <strong>[GET]</strong> <br>
+        http://127.0.0.1:81/usuario/1 <br>
+
+        Respota esperada no postman: <br>
+        {
+        &nbsp;"usuario": { <br>
+        &nbsp;"id": 1, <br>
+        &nbsp;"nome": "NomeDoUsuario", <br>
+        &nbsp;"email": "emaildousuario@email.com" <br>
+        } <br>
+        } <br>
+        -------------------------------------- <br>
+        <h4>Requisição ATUALIZAR Usuario pelo ID</h4>
+
+        http://127.0.0.1:81/usuario/id <br>
+
+        <ul>
+            <li> POSTMAN</li>
+            <li>BODY</li>
+            <li>RAW</li>
+            <li>JSON</>
+        </ul>
+        METHOD:<strong> [PUT]</strong>
+        http://127.0.0.1:81/usuario/3 <br>
+
+        <br>
+        { <br>
+        "nome": "NomeDoUsuario", <br>
+        "email": "emaildousuario@email.com" <br>
+        } <br> <br>
+
+        Respota esperada no postman: <br>
+        {<br>
+            &nbsp; "usuario": { <br>
+            &nbsp;"id": 3, <br>
+            &nbsp;"nome": "NomeDoUsuario", <br>
+            &nbsp;"email": "emaildousuario@email.com" <br>
+        }, <br>
+        &nbsp"mensagem": "Atualizado com sucesso" <br>
+        } <br>
+        --------------------------------------
+        <h4>Requisição DELETAR Usuario pelo ID</h4>
+
+            http://127.0.0.1:81/usuario/id <br>
+
+                POSTMAN <br>
+                METHOD: <strong>[DELETE]</strong> <br>
+                http://127.0.0.1:81/usuario/3 <br>
+                <br>
+                Respota esperada no postman: <br>
+                { <br>
+                    &nbsp;"usuario": { <br>
+                    &nbsp;"id": 3, <br>
+                    &nbsp;"nome": "NomeDoUsuario", <br>
+                    &nbsp;"email": "emaildousuario@email.com" <br>
+                }, <br>
+                "mensagem": "Deletado com sucesso" <br>
+                } <br>
+    </div>
+</body>
+
+</html>

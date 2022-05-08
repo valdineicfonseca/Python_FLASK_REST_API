@@ -1,0 +1,14 @@
+Vd:
+you/watch?v=WDpPGFkI9UU
+
+pip install
+.flask
+.flask_sqlalchemy
+.mysql-connector-python
+.mysqlclient
+
+rodar Xamp apache port:80 e mysql port:3306
+rodar FLask conda Flask_API - Virtualizaçao
+
+cmd port 81:
+python api_full.py

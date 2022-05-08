@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Otimização de Serviços e Vendas">
+    <meta name="keywords" content="HTML, CSS, JavaScript, mazal, icons">
+    <meta name="author" content="Valdinei C.">
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500&family=Raleway:wght@100;200;300;400;500&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "ROBOTO", sans-serif;
+            --background-color: #413b3b;
+            color: #03dac6;
+        }
+
+        h2 {
+            color: #03dac6;
+            background-color: #413b3b;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: #6C7A89;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 450px;
+            height: 610px;
+            background: rgb(48, 44, 44);
+        }
+
+        .cadastrado,
+        #cad_resp {
+
+            background: none;
+            font-size: 20px;
+            text-align: center;
+            width: 350px;
+            height: 300px;
+            margin: 60px 50px;
+        }
+
+        #otimo {
+            font-size: 30px;
+            font-weight: 600px;
+            background: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            border-color: #03dac6;
+            border: 1px;
+            width: 300px;
+            height: 80px;
+            margin-top: 20px;
+            margin-left: 20px;
+            padding-top: 5px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #03dac6;
+            color: black;
+            font-size: 25px;
+        }
+
+        .frase {
+            font-size: 20px;
+            background: none;
+        }
+
+        .titulo {
+            position: relative;
+            width: 400px;
+            padding: 15px 10px 15px 10px;
+            vertical-align: middle;
+            display: table-cell;
+        }
+        .titulo2{
+            display: inline-block;
+            position: absolute;
+            top: 23px;
+            height: 30px;
+            width: 300px;
+            --background-color: aqua;
+            padding-bottom: 10px;
+        }
+        .icone {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            --background-color: rgba(235, 22, 6, 0.61);
+            margin-top: 10px;
+            font-size: 25px;
+        }
+        .form_cadastro{
+            background-color: none;
+            width: 500px;
+            height: 300px;
+            --margin-left: 50px;
+            
+        }
+        .lbl_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 55px;
+            margin-top: 5px;
+            --background-color: #6C7A89;
+        }
+        .input_cadastro_form{
+            font-size: 25px;
+            text-align: left;
+            margin-left: 55px;
+            margin-top: 5px;
+            background-color: #6C7A89;
+            padding-left: 10px;
+            color: crimson;
+
+        }
+        .check_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 55px;
+            margin-top: 5px;
+            height: 20px; 
+            width: 20px;
+
+        }
+        .check_texto_cadastro_form{
+            font-size: 25px;
+            text-align: right;
+            margin-left: 5px;
+            margin-top: 5px;
+
+        }
+        #btn_cadastro_form{
+            font-size: 25px;
+            text-align: center;
+            margin-left: 50px;
+            margin-top: 20px;
+            height: 50px; 
+            width: 340px;
+            border-radius: 10px;
+            border: 2px solid #03dac6;
+            background-color: black;
+        }
+        #btn_cadastro_form:hover{
+            color: black;
+            background-color: #03dac6;
+            font-size: 28px;
+        }
+        
+    </style>
+
+    <title>Verificando dados</title>
+</head>
+
+<body onload="start()">
+
+    <div class="container">
+        <div class="box">
+            <h2>
+                <div class="titulo"> 
+                    <div class="icone">
+                        <span class="material-icons">
+                            assignment_ind
+                        </span>
+                    </div>
+                    <div class="titulo2">
+                        Cadastro
+                    </div> 
+                   
+                </div>
+            </h2>
+
+            <div class="cadastrado" id="cad_ok">
+                <span id="cad_resp">{{ cadastro }}</span>
+                <br>{{ name }}
+                <br><br>
+                <p>
+                    <span id="otimo">Óitmo</span>
+                </p><br>
+                <span class="frase">Seu e-mail já esta em</span>
+                <span class="frase">nosso banco de dados!</span>
+                <span class="frase">Em breve entraremos em contato!</span>
+                <span class="frase">Mas se quiser entrar em contato,</span>
+                <span class="frase">clique no botão abaixo:</span>
+                <br>
+                <a
+                    href="https://api.whatsapp.com/send?phone=5533998319563&text=Ol%C3%A1%2C%20gostaria%20de%20alavancar%20minhas%20vendas%2C%20de%20produtos%20ou%20servi%C3%A7os.">
+                    <div class="btn">
+                        <span class="material-icons" ">
+                            markunread
+                        </span><br> 33 99831-9563
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="form_cadastro" id="form">
+                <form  method="POST" name="myForm" id="myFormSend" action="http://127.0.0.1:81/pegavalor">
+                    <br>
+                    <p><label class="lbl_cadastro_form" for="nome_form">
+                        Seu nome: <br>
+                    </label>
+                    <input type="text" name="nome_form" id="nome_form_id" class="input_cadastro_form"></p>
+            
+                    <p><label class="lbl_cadastro_form" for="email_form">
+                        Seu e-mail: <br>
+                    </label>
+                    <input type="email" name="email_form" class="input_cadastro_form" id="email_form_id" value="{{ name }}" required></p>
+                    
+                    <br><span class="lbl_cadastro_form">Marque os serviços de interesse:</span>
+                    <p><br>
+                    <input class="check_cadastro_form" type="checkbox" name="seo_form" id="seo_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="seo_form">
+                        SEO Busca otimizada
+                    </label></p>
+                    
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="ia_form" id="ia_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="ia_form">
+                        I.A Inteligência Artificial
+                    </label></p>
+                    
+
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="vendas_form" id="vendas_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="vendas_form">
+                        Vendas na internet
+                    </label></p>
+                    
+
+                    <p>
+                    <input class="check_cadastro_form" type="checkbox" name="tp_form" id="tp_form_id" value="sim" checked>
+                    <label class="check_texto_cadastro_form" for="tp_form">
+                        Tráfego pago
+                    </label></p>
+                    
+                    <br>        
+                    <p><label class="lbl_cadastro_form" for="data_form">
+                        Data: <br>
+                    </label>
+                    <input type="text" name="data_form" id="data_form_id" class="input_cadastro_form" style="color: black;" readonly></p>
+
+                    <input value="Cadastrar" type="button" id="btn_cadastro_form">
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+
+      document.getElementById("btn_cadastro_form").addEventListener("click", myFunction)
+
+      function myFunction(){
+        let seo = document.getElementById("seo_form_id")
+        let ia = document.getElementById("ia_form_id")
+        let vendas = document.getElementById("vendas_form_id")
+        let tp = document.getElementById("tp_form_id")
+
+        if (seo.checked === false){
+            seo.value = "nao"
+            seo.checked = true
+        }
+        if (ia.checked === false){
+            ia.value = "nao"
+            ia.checked = true
+        }
+        if (vendas.checked === false){
+            vendas.value = "nao"
+            vendas.checked = true
+        }
+        if (tp.checked === false){
+            tp.value = "nao"
+            tp.checked = true // evitar erro no python de nao detectar campo
+        }
+
+        console.log("seo ", seo.value)
+        console.log("inteligencia artificial ", ia.value)
+        console.log("vendas na internet ", vendas.value)
+        console.log("trafego pago ", tp.value)
+
+        document.getElementById("myFormSend").submit()
+      }
+        
+   
+    function start() {
+
+        console.log(" start ok!") 
+        let divcad_ok = document.getElementById("cad_ok")
+        let form_cad = document.getElementById("form") 
+        let resp = document.getElementById("cad_resp").innerHTML 
+        let datanow = document.getElementById("data_form_id")
+        console.log(resp)
+
+        //  use as simple as
+        let data_atual = new Date().toLocaleDateString() //('m-d-Y')  
+        console.log(data_atual)
+        datanow.value = data_atual
+
+        divcad_ok.style.display = "none" 
+        form_cad.style.display = "none"
+
+        if (resp === "E-mail já cadastrado") {
+            console.log("email cadastrado ok!") 
+            divcad_ok.style.display="block" //exibe div 
+        } else {
+            form_cad.style.display = "block"
+        }
+    } 
+</script>
+
+</html>

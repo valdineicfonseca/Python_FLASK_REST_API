@@ -13,9 +13,9 @@
 #    "nome": "NomeDoUsuario",
 #    "email": "emaildousuario@email.com"
 #}
-#----------------------------------
-# Author : Valdinei C @ 2022
-#----------------------------------
+#-------------------------------------
+# Author : Valdinei C @ 2022 | Develop
+#-------------------------------------
 
 from email import encoders
 from email.mime.base import MIMEBase
